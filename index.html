@@ -7,7 +7,21 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #e9ecef; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
         .gallery { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .card { background: white; width: 250px; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card { 
+    background: white; 
+    width: 250px; 
+    margin: 15px; 
+    padding: 15px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2); 
+}
         .card h3 { color: #e67e22; }
         footer { text-align: center; padding: 20px; font-size: 0.9em; color: #666; }
     </style>
@@ -25,10 +39,10 @@
             <p>ليست مجرد دراسة، بل هي فن حل المشكلات وبناء العوالم الرقمية.</p>
         </div>
 
-        <div class="card" style="border: 1px solid #ccc;">
-            <h3>هواية الزميل (قيد الإضافة)</h3>
-            <p>يمكن لزميلي الثاني استبدال هذا النص بوصف لهوايته الخاصة.</p>
-        </div>
+       <div class="card">
+    <h3>قراءة الروايات 📖</h3>
+    <p>استكشاف العوالم الخيالية في الروايات الآسيوية، حيث تلتقي الثقافة بالخيال لتخلق مغامرات لا تنتهي.</p>
+</div>
     </div>
 
     <footer>
