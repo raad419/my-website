@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+    <style>
+  /* هذا الكود يجعل البطاقات ترتفع قليلاً وتتغير ألوانها عند التأشير عليها */
+  .card:hover {
+      transform: translateY(-10px); 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border: 2px solid #ff7e5f;
+  }
+  
+  /* هذا اللون سيظهر فقط عندما تضغط زر الوضع الليلي */
+  .dark-mode {
+      background-color: #1a1a1a !important;
+      color: white !important;
+  }
+</style>
 <head>
     <meta charset="UTF-8">
     <title>ملتقى الهوايات</title>
@@ -27,7 +41,9 @@
     </style>
 </head>
 <body>
-
+<button onclick="toggleDarkMode()" style="cursor:pointer; padding:10px; margin:10px;">
+   🌙 تغيير الوضع
+</button>
     <header>
         <h1>مساحة هواياتنا المشتركة 🎨</h1>
         <p>موقع تعاوني لعرض ما نحب خارج نطاق الدراسة</p>
