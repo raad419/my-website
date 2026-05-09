@@ -32,7 +32,12 @@
         <h1>مساحة هواياتنا المشتركة 🎨</h1>
         <p>موقع تعاوني لعرض ما نحب خارج نطاق الدراسة</p>
     </header>
-
+<div style="text-align: center; margin: 20px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: fit-content; margin-left: auto; margin-right: auto;">
+        <h3 style="color: #2c3e50; margin-top: 0;">شاركنا هوايتك!</h3>
+        <input type="text" id="hobbyTitle" placeholder="اسم الهواية (مثال: التصوير)" style="padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; width: 200px;">
+        <input type="text" id="hobbyDesc" placeholder="اكتب وصفاً قصيراً لهوايتك..." style="padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;">
+        <button onclick="addNewHobby()" style="padding: 10px 20px; background-color: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">أضف البطاقة ➕</button>
+    </div>
     <div class="gallery">
         <div class="card">
             <h3>البرمجة</h3>
@@ -48,6 +53,39 @@
     <footer>
         تطوير فريق العمل على GitHub - 2026
     </footer>
+<script>
+        function addNewHobby() {
+            // جلب القيم اللي كتبها المستخدم
+            let title = document.getElementById('hobbyTitle').value;
+            let desc = document.getElementById('hobbyDesc').value;
 
+            // التأكد من أن الحقول مو فارغة
+            if (title === "" || desc === "") {
+                alert("الرجاء كتابة اسم الهواية ووصفها قبل الإضافة!");
+                return;
+            }
+
+            // إنشاء العناصر الجديدة للبطاقة
+            let newCard = document.createElement('div');
+            newCard.className = 'card';
+
+            let newTitle = document.createElement('h3');
+            newTitle.innerText = title;
+
+            let newDesc = document.createElement('p');
+            newDesc.innerText = desc;
+
+            // تركيب البطاقة
+            newCard.appendChild(newTitle);
+            newCard.appendChild(newDesc);
+
+            // إضافة البطاقة الجديدة إلى المعرض (Gallery)
+            document.querySelector('.gallery').appendChild(newCard);
+
+            // تفريغ الحقول بعد الإضافة
+            document.getElementById('hobbyTitle').value = "";
+            document.getElementById('hobbyDesc').value = "";
+        }
+    </script>
 </body>
 </html>
