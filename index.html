@@ -1,183 +1,175 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <style>
-  /* هذا الكود يجعل البطاقات ترتفع قليلاً وتتغير ألوانها عند التأشير عليها */
-  .card:hover {
-      transform: translateY(-10px); 
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      border: 2px solid #ff7e5f;
-  }
-  
-  /* هذا اللون سيظهر فقط عندما تضغط زر الوضع الليلي */
-  .dark-mode {
-      background-color: #1a1a1a !important;
-      color: white !important;
-  }
-   #particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #000000; /* اللون الأسود */
-}     
-</style>
 <head>
     <meta charset="UTF-8">
-    <title>ملتقى الهوايات</title>
+    <title>مشروع ملتقى الهوايات - الفضاء</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #e9ecef; }
-        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .gallery { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .card { 
-    background: white; 
-    width: 250px; 
-    margin: 15px; 
-    padding: 15px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    cursor: pointer;
-}
+        /* إعدادات الفضاء والظلام */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background: #050505; /* أسود عميق */
+            color: white;
+            overflow-x: hidden;
+        }
 
-.card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2); 
-}
-        .card h3 { color: #e67e22; }
-        footer { text-align: center; padding: 20px; font-size: 0.9em; color: #666; }
+        /* حاوية النجوم والشهب */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* إضافة القمر (البدر) */
+        .moon {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 120px;
+            height: 120px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg');
+            background-size: cover;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* تنسيق المحتوى فوق الفضاء */
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        header { 
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 40px; 
+            text-align: center; 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* التصميم الزجاجي للبطاقات (Glassmorphism) */
+        .card, .input-section { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(230, 126, 34, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+        
+        h1, h2, h3 { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        p { color: #ccc; }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { scale: 1.05; box-shadow: 0 0 15px #e67e22; }
+
+        input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px;
+        }
     </style>
 </head>
-<body> 
-  <div id="particles-js"></div>  
-<button onclick="toggleDarkMode()" style="cursor:pointer; padding:10px; margin:10px;">
-   🌙 تغيير الوضع
-</button>
-    <header>
-        <h1>مساحة هواياتنا المشتركة 🎨</h1>
-        <p>موقع تعاوني لعرض ما نحب خارج نطاق الدراسة</p>
-    </header>
-<div style="text-align: center; margin: 20px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: fit-content; margin-left: auto; margin-right: auto;">
-        <h3 style="color: #2c3e50; margin-top: 0;">شاركنا هوايتك!</h3>
-        <input type="text" id="hobbyTitle" placeholder="اسم الهواية (مثال: التصوير)" style="padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; width: 200px;">
-        <input type="text" id="hobbyDesc" placeholder="اكتب وصفاً قصيراً لهوايتك..." style="padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;">
-        <button onclick="addNewHobby()" style="padding: 10px 20px; background-color: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">أضف البطاقة ➕</button>
-    </div>
-    <div class="gallery">
-        <div class="card">
-            <h3>البرمجة</h3>
-            <p>ليست مجرد دراسة، بل هي فن حل المشكلات وبناء العوالم الرقمية.</p>
+<body>
+
+    <div id="particles-js"></div>
+    <div class="moon"></div>
+
+    <div class="content-wrapper">
+        <header>
+            <h1>مساحة هواياتنا المشتركة 🎨</h1>
+            <p>مشروع الويب المطور - نظام الفضاء التفاعلي</p>
+        </header>
+
+        <div class="input-section" style="max-width: 600px; margin: 30px auto; text-align: center;">
+            <h3>أضف بصمتك الخاصة ✨</h3>
+            <input type="text" id="hobbyTitle" placeholder="اسم الهواية">
+            <input type="text" id="hobbyDesc" placeholder="وصف سريع...">
+            <button onclick="addNewHobby()">نشر الآن</button>
         </div>
 
-       <div class="card">
-    <h3>قراءة الروايات 📖</h3>
-    <p>استكشاف العوالم الخيالية في الروايات الآسيوية، حيث تلتقي الثقافة بالخيال لتخلق مغامرات لا تنتهي.</p>
-</div>
-    </div>
-<div style="background: white; margin: 20px; padding: 20px; border-radius: 10px; text-align: center; clear: both;">
-    <h2 style="color: #2c3e50;">قيم أعمالي 🖼️</h2>
-    <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; border-radius: 10px;">
-       <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-    
-    <div style="text-align: center; border: 1px solid #eee; padding: 10px; border-radius: 12px; background: #fafafa;">
-        <img src="drawing1.jpg" style="width: 160px; height: 160px; object-fit: cover; border-radius: 10px; border: 2px solid #e67e22;">
-        <p style="margin-top: 8px; font-weight: bold; color: #555;">طبيعة صامتة</p>
-    </div>
-
-    <div style="text-align: center; border: 1px solid #eee; padding: 10px; border-radius: 12px; background: #fafafa;">
-        <img src="drawing2.jpg" style="width: 160px; height: 160px; object-fit: cover; border-radius: 10px; border: 2px solid #e67e22;">
-        <p style="margin-top: 8px; font-weight: bold; color: #555;">بورتريه خيالي</p>
+        <div class="gallery">
+            <div class="card" style="width: 280px;">
+                <h3>البرمجة 💻</h3>
+                <p>بناء الأنظمة وتطوير الواجهات الاحترافية.</p>
+            </div>
+            <div class="card" style="width: 280px;">
+                <h3>الفلك والنجوم 🌌</h3>
+                <p>استكشاف أسرار الكون من خلال هذا المشروع.</p>
+            </div>
+        </div>
+        <footer style="text-align: center; padding: 50px; color: #666;">
+            تم التطوير بروح الفريق على GitHub &copy; 2026
+        </footer>
     </div>
 
-</div>
-        <p>ما تقييمك؟</p>
-        <button onclick="alert('شكراً!')">⭐</button>
-    </div>
-    <hr>
-    <h2 style="color: #2c3e50;">أرسل صورتك لأقيمها 📤</h2>
-    <input type="file" id="userImage" accept="image/*" onchange="previewAndRate()">
-    <div id="previewArea"></div>
-</div>
-    <footer>
-        تطوير فريق العمل على GitHub - 2026
-    </footer>
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 160, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 1, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": {
+                    "enable": true,
+                    "speed": 5, /* سرعة الشهب */
+                    "direction": "bottom-right",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out"
+                }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "bubble" } }
+            },
+            "retina_detect": true
+        });
+
         function addNewHobby() {
-            // جلب القيم اللي كتبها المستخدم
             let title = document.getElementById('hobbyTitle').value;
             let desc = document.getElementById('hobbyDesc').value;
-
-            // التأكد من أن الحقول مو فارغة
-            if (title === "" || desc === "") {
-                alert("الرجاء كتابة اسم الهواية ووصفها قبل الإضافة!");
-                return;
+            if (title && desc) {
+                let card = document.createElement('div');
+                card.className = 'card';
+                card.style.width = '280px';
+                card.innerHTML = <h3>${title}</h3><p>${desc}</p>;
+                document.querySelector('.gallery').appendChild(card);
+                document.getElementById('hobbyTitle').value = "";
+                document.getElementById('hobbyDesc').value = "";
             }
-// دالة رفع وتقييم الصور
-function previewAndRate() {
-    let file = document.getElementById('userImage').files[0];
-    let previewArea = document.getElementById('previewArea');
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            previewArea.innerHTML = 
-                <div style="margin-top:20px; border: 2px dashed #e67e22; padding: 10px;">
-                    <img src="${e.target.result}" style="max-height:200px;">
-                    <h4 style="color: #e67e22;">تقييمي: 9/10</h4>
-                </div>;
         }
-        reader.readAsDataURL(file);
-    }
-}
-            // إنشاء العناصر الجديدة للبطاقة
-            let newCard = document.createElement('div');
-            newCard.className = 'card';
-
-            let newTitle = document.createElement('h3');
-            newTitle.innerText = title;
-
-            let newDesc = document.createElement('p');
-            newDesc.innerText = desc;
-
-            // تركيب البطاقة
-            newCard.appendChild(newTitle);
-            newCard.appendChild(newDesc);
-
-            // إضافة البطاقة الجديدة إلى المعرض (Gallery)
-            document.querySelector('.gallery').appendChild(newCard);
-
-            // تفريغ الحقول بعد الإضافة
-            document.getElementById('hobbyTitle').value = "";
-            document.getElementById('hobbyDesc').value = "";
-        }
-    /* كود تشغيل خلفية النجوم والشهب */
-var script = document.createElement('script');
-script.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
-script.onload = function() {
-    particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#ffffff" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.5, "random": true },
-            "size": { "value": 3, "random": true },
-            "line_linked": { "enable": false },
-            "move": {
-                "enable": true,
-                "speed": 4,
-                "direction": "bottom-right",
-                "random": true,
-                "straight": false,
-                "out_mode": "out"
-            }
-        },
-        "interactivity": {
-            "events": { "onhover": { "enable": true, "mode": "repulse" } }
-        },
-        "retina_detect": true
-    });
-};
-document.head.appendChild(script);
     </script>
 </body>
 </html>
