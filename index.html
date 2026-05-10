@@ -13,6 +13,15 @@
       background-color: #1a1a1a !important;
       color: white !important;
   }
+   #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #000000; /* اللون الأسود */
+}     
 </style>
 <head>
     <meta charset="UTF-8">
@@ -40,7 +49,8 @@
         footer { text-align: center; padding: 20px; font-size: 0.9em; color: #666; }
     </style>
 </head>
-<body>
+<body> 
+  <div id="particles-js"></div>  
 <button onclick="toggleDarkMode()" style="cursor:pointer; padding:10px; margin:10px;">
    🌙 تغيير الوضع
 </button>
@@ -140,6 +150,34 @@ function previewAndRate() {
             document.getElementById('hobbyTitle').value = "";
             document.getElementById('hobbyDesc').value = "";
         }
+    /* كود تشغيل خلفية النجوم والشهب */
+var script = document.createElement('script');
+script.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+script.onload = function() {
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": false },
+            "move": {
+                "enable": true,
+                "speed": 4,
+                "direction": "bottom-right",
+                "random": true,
+                "straight": false,
+                "out_mode": "out"
+            }
+        },
+        "interactivity": {
+            "events": { "onhover": { "enable": true, "mode": "repulse" } }
+        },
+        "retina_detect": true
+    });
+};
+document.head.appendChild(script);
     </script>
 </body>
 </html>
